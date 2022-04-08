@@ -1,6 +1,6 @@
 ﻿namespace core10_swapi.Models
 {
-    public class ActorVehicleDetails
+    public class Vehicle
     {
         public string name { get; set; }
         public string model { get; set; }

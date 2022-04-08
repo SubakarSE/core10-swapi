@@ -1,6 +1,6 @@
 ﻿namespace core10_swapi.Models
 {
-    public class Actor
+    public class Biography
     {
         public string name { get; set; }
         public string height { get; set; }
@@ -17,8 +17,18 @@
         public DateTime created { get; set; }
         public DateTime edited { get; set; }
         public string url { get; set; }
-        public List<ActorVehicleDetails> vehicleInfo { get; set; }
+        public List<Vehicle> vehicleInfo { get; set; }
+        public List<Starship> starshipinfo { get; set; }
 
+
+    }
+
+    public class Character
+    {
+        public int count { get; set; }
+        public object next { get; set; }    
+        public object previous { get; set; }
+        public List<Biography> results { get; set; }
 
     }
 }
