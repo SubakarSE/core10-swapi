@@ -2,7 +2,7 @@
 
 namespace core10_swapi.ModelServices
 {
-    public interface ISwapiServices
+    public interface ISwapiServices : IDisposable
     {
         public Task<Character> GetCharacterBiography<Character>(string name);
         public Task<Starship> GetStarshipDetails<Starship>(string url);
