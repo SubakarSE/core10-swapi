@@ -10,7 +10,9 @@ Requirements:
 Endpoints:
 
 (1) https://localhost:7115/GetStarship?name=Luke%20Skywalker
+
 (2) https://localhost:7115/GetSpeciesClassification?episode=1
+
 (3) https://localhost:7115/GetTotalPopulation
 
 
