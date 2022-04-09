@@ -3,14 +3,14 @@ using core10_swapi.ModelServices;
 
 namespace core10_swapi.ModelBuilders
 {
-    public class CharacterGraphyBuilder : ICharacterBiographyBuilder
+    public class CharacterGraphyBuilder : ISwapiModelBuilder
     {
-        ISwapiServices _actorService;
+        ISwapiServices _service;
         private readonly ILogger<CharacterGraphyBuilder> _logger;
 
-        public CharacterGraphyBuilder(ISwapiServices actorService, ILogger<CharacterGraphyBuilder> logger)
+        public CharacterGraphyBuilder(ISwapiServices service, ILogger<CharacterGraphyBuilder> logger)
         {
-            _actorService = actorService;
+            _service = service;
             _logger = logger;
         }
         public Task<Character> GetCharacterBiography<Character>(string name)
@@ -18,7 +18,7 @@ namespace core10_swapi.ModelBuilders
             _logger.LogDebug($"[GetCharacterBiography] GetCharacterBiography");
             try
             {
-                Task<Character> actorInfo = _actorService.GetCharacterBiography<Character>(name);
+                Task<Character> actorInfo = _service.GetCharacterBiography<Character>(name);
                 return actorInfo;
 
             }
@@ -35,7 +35,7 @@ namespace core10_swapi.ModelBuilders
             _logger.LogDebug($"[GetStarShipDetails] GetStarShipDetails");
             try
             {
-                Task<StarshipDetails> actorInfo = _actorService.GetStarshipDetails<StarshipDetails>(url);
+                Task<StarshipDetails> actorInfo = _service.GetStarshipDetails<StarshipDetails>(url);
                 return actorInfo;
 
             }
@@ -51,7 +51,7 @@ namespace core10_swapi.ModelBuilders
             _logger.LogDebug($"[GetFilmDetails] GetFilmDetails");
             try
             {
-                Task<Film> filmInfo = _actorService.GetFilmDetails<Film>();
+                Task<Film> filmInfo = _service.GetFilmDetails<Film>();
                 return filmInfo;
 
             }
@@ -67,7 +67,7 @@ namespace core10_swapi.ModelBuilders
             _logger.LogDebug($"[GetSpeciesDetails] GetSpeciesDetails");
             try
             {
-                Task<Species> actorInfo = _actorService.GetSpeciesDetails<Species>(url);
+                Task<Species> actorInfo = _service.GetSpeciesDetails<Species>(url);
                 return actorInfo;
 
             }
@@ -83,7 +83,7 @@ namespace core10_swapi.ModelBuilders
             _logger.LogDebug($"[GetPlanetDetails] GetPlanetDetails");
             try
             {
-                Task<Planet> planetInfo = _actorService.GetPlanetDetails<Planet>(url);
+                Task<Planet> planetInfo = _service.GetPlanetDetails<Planet>(url);
                 return planetInfo;
 
             }

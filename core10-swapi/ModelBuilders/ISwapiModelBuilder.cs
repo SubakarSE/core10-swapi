@@ -1,6 +1,6 @@
 ﻿namespace core10_swapi.ModelBuilders
 {
-    public interface ICharacterBiographyBuilder
+    public interface ISwapiModelBuilder
     {
         public Task<Character> GetCharacterBiography<Character>(String actor);
         public Task<StarshipDetails> GetStarShipDetails<StarshipDetails>(string url);

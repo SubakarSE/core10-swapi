@@ -10,57 +10,24 @@ namespace core10_swapi.Controllers
     public class SwapiController : ControllerBase
     {
         private readonly  ILogger<SwapiController> _logger;
-        private  readonly ICharacterBiographyBuilder _builder;
+        private  readonly ISwapiModelBuilder _builder;
 
-        public SwapiController(ILogger<SwapiController> logger, ICharacterBiographyBuilder builder)
+        public SwapiController(ILogger<SwapiController> logger, ISwapiModelBuilder builder)
         {
             _logger = logger;
             _builder = builder;
         }
-        [HttpGet]
-        [Route("GetClassification")]
-        public async Task<List<Species>> GetClassificationForEpisode(int episode)
-        {
-            _logger.LogDebug($"[GetClassificationForEpisode] Get Call");
-            Film filmInfo = null;
-            List<Species> lstSpeciesInfo = new List<Species>();
-            try
-            {
-                filmInfo = await _builder.GetFilmDetails<Film>();
-                
-                foreach (var data in filmInfo.results)
-                {
-                    if(data.episode_id == episode)
-                    {
-                        foreach (var speciesurl in data.species)
-                        {
-                            Species speciesinfo = await _builder.GetSpeciesDetails<Species>(speciesurl);
-                            if (speciesinfo != null)
-                            {
-                                lstSpeciesInfo.Add(speciesinfo);
-                            }
-                        }
 
-                    }
-
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogDebug($"[GetStarshipForCharacter] Exception");
-                throw ex;
-            }
-            return lstSpeciesInfo;
-
-        }
 
         [HttpGet]
         [Route("GetStarship")]
-        public async Task<List<Starship>> GetStarshipForCharacter(string name)
+        public async Task<Result> GetStarshipForCharacter(string name)
         {
             _logger.LogDebug($"[GetStarshipForCharacter] Get Call");
             Character characterInfo = null;
             List<Starship> lstStartshipInfo = new List<Starship>();
+            Result rst = null;
+
             try
             {
                 characterInfo = await _builder.GetCharacterBiography<Character>(name);
@@ -85,13 +52,55 @@ namespace core10_swapi.Controllers
                     }
 
                 }
+                rst = new Result(HttpStatusCode.OK, lstStartshipInfo);
             }
             catch (Exception ex)
             {
                 _logger.LogDebug($"[GetStarshipForCharacter] Exception");
-                throw ex;
+                rst = new Result(HttpStatusCode.InternalServerError, "");
+                return rst; ;
             }
-            return lstStartshipInfo;
+            return rst;
+
+        }
+
+        [HttpGet]
+        [Route("GetSpeciesClassification")]
+        public async Task<Result> GetClassificationForEpisode(int episode)
+        {
+            _logger.LogDebug($"[GetClassificationForEpisode] Get Call");
+            Film filmInfo = null;
+            List<Species> lstSpeciesInfo = new List<Species>();
+            Result rst = null;
+            try
+            {
+                filmInfo = await _builder.GetFilmDetails<Film>();
+
+                foreach (var data in filmInfo.results)
+                {
+                    if (data.episode_id == episode)
+                    {
+                        foreach (var speciesurl in data.species)
+                        {
+                            Species speciesinfo = await _builder.GetSpeciesDetails<Species>(speciesurl);
+                            if (speciesinfo != null)
+                            {
+                                lstSpeciesInfo.Add(speciesinfo);
+                            }
+                        }
+
+                    }
+
+                }
+                rst = new Result(HttpStatusCode.OK, lstSpeciesInfo);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDebug($"[GetStarshipForCharacter] Exception");
+                rst = new Result(HttpStatusCode.InternalServerError, "");
+                return rst; ;
+            }
+            return rst;
 
         }
 
@@ -102,7 +111,7 @@ namespace core10_swapi.Controllers
             _logger.LogDebug($"[GetTotalPopulation] Get Call");
             Planet planetInfo = null;
             long population = 0;
-            Result rst = new Result();
+            Result rst = null;
 
 
             try
@@ -126,14 +135,14 @@ namespace core10_swapi.Controllers
                     }
 
                 }
-                rst.result = population;
-                rst.status = HttpStatusCode.OK;
-                rst.message = "Sucess";
+              
+                rst = new Result(HttpStatusCode.OK, population);
             }
             catch (Exception ex)
             {
                 _logger.LogDebug($"[GetTotalPopulation] Exception");
-                throw ex;
+                rst = new Result(HttpStatusCode.InternalServerError, "");
+                return rst; ;
             }
             return rst;
 
