@@ -5,6 +5,12 @@ namespace core10_swapi.ModelServices
     public interface ISwapiServices
     {
         public Task<Character> GetCharacterBiography<Character>(string name);
-        public Task<StarshipDetails> GetStarshipDetails<StarshipDetails>(string url);
+        public Task<Starship> GetStarshipDetails<Starship>(string url);
+
+        public Task<Film> GetFilmDetails<Film>();
+        public Task<Species> GetSpeciesDetails<Species>(string url);
+
+        public Task<Planet> GetPlanetDetails<Planet>(string url);
+
     }
 }

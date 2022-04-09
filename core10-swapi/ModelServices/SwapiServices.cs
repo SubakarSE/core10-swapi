@@ -29,6 +29,59 @@ namespace core10_swapi.ModelServices
             }
         }
 
+        public Task<Film> GetFilmDetails<Film>()
+        {
+            _logger.LogDebug($"[GetFilmDetails] GetFilmDetails");
+            try
+            {
+                string url = CommonConstants.base_url + "films/";
+                APIHelper helper = new APIHelper();
+                Task<Film> filmInfo = helper.DataRequest<Film>(CommonConstants.HTTP_GET, null, url, string.Empty);
+                
+                return filmInfo;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDebug($"[GetFilmDetails] GetFilmDetails Exception : {Newtonsoft.Json.JsonConvert.SerializeObject(ex)}");
+                throw ex;
+            }
+        }
+
+        public Task<Planet> GetPlanetDetails<Planet>(string url)
+        {
+            _logger.LogDebug($"[GetPlanetDetails] GetPlanetDetails");
+            try
+            {
+                if (string.IsNullOrEmpty(url)) {
+                    url = CommonConstants.base_url + "planets/";
+                }
+                APIHelper helper = new APIHelper();
+                Task<Planet> planetDetails = helper.DataRequest<Planet>(CommonConstants.HTTP_GET, null, url, string.Empty);
+                return planetDetails;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDebug($"[GetPlanetDetails] GetPlanetDetails Exception : {Newtonsoft.Json.JsonConvert.SerializeObject(ex)}");
+                throw ex;
+            }
+        }
+
+        public Task<Species> GetSpeciesDetails<Species>(string url)
+        {
+            _logger.LogDebug($"[GetSpeciesDetails] GetSpeciesDetails");
+            try
+            {
+                APIHelper helper = new APIHelper();
+                Task<Species> speciesDetails = helper.DataRequest<Species>(CommonConstants.HTTP_GET, null, url, string.Empty);
+                return speciesDetails;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDebug($"[GetSpeciesDetails] GetSpeciesDetails Exception : {Newtonsoft.Json.JsonConvert.SerializeObject(ex)}");
+                throw ex;
+            }
+        }
+
         public Task<StarshipDetails> GetStarshipDetails<StarshipDetails>(string url)
         {
             _logger.LogDebug($"[GetStarshipDetails] GetStarshipDetails");

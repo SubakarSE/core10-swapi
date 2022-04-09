@@ -2,7 +2,9 @@
 {
     public class Species
     {
-           public string classification { get; set; }
+        public string classification { get; set; }
+
+        public string name { get; set; }
 
     }
 }
