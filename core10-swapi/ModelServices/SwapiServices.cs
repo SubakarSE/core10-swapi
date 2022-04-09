@@ -53,6 +53,7 @@ namespace core10_swapi.ModelServices
             }
         }
 
+
         public Task<Planet> GetPlanetDetails<Planet>(string url)
         {
             _logger.LogDebug($"[GetPlanetDetails] GetPlanetDetails");
