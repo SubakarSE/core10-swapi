@@ -15,5 +15,7 @@ Endpoints:
 Useful Info:
 
 Endpoint 1 (GetStarShip) will take "name" as input and give you starship names related to that character.
+
 Endpoint 2 (GetSpeciesClassification) wll take "episode" as input and gives back list of species classification in that particular episode
+
 Endpoint 3 (GetTotalPopulation) just return total population of all planets
