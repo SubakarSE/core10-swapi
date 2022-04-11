@@ -19,8 +19,7 @@
         public string url { get; set; }
         public List<Vehicle> vehicleInfo { get; set; }
         public List<Starship> starshipinfo { get; set; }
-
-
+        public string birth_year { get; set; }
     }
 
     public class Character

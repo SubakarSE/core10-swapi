@@ -3,12 +3,12 @@ using core10_swapi.ModelServices;
 
 namespace core10_swapi.ModelBuilders
 {
-    public class CharacterGraphyBuilder : ISwapiModelBuilder
+    public class SwapiModelBuilder : ISwapiModelBuilder
     {
         ISwapiServices _service;
-        private readonly ILogger<CharacterGraphyBuilder> _logger;
+        private readonly ILogger<SwapiModelBuilder> _logger;
 
-        public CharacterGraphyBuilder(ISwapiServices service, ILogger<CharacterGraphyBuilder> logger)
+        public SwapiModelBuilder(ISwapiServices service, ILogger<SwapiModelBuilder> logger)
         {
             _service = service;
             _logger = logger;
